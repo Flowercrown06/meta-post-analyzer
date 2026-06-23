@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  postgres-db:
+    image: postgres:15-alpine
+    container_name: postgres_container
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: spring_app_container
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_URL=jdbc:postgresql://postgres-db:5432/postgres
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=password
+      - META_ACCESS_TOKEN=mock_token_123456
+      - META_API_URL=https://graph.facebook.com/v19.0
+    depends_on:
+      - postgres-db
+
+volumes:
+  pgdata:
