@@ -19,9 +19,9 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - DB_URL=jdbc:postgresql://postgres-db:5432/postgres
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=password
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
       - META_ACCESS_TOKEN=mock_token_123456
       - META_API_URL=https://graph.facebook.com/v19.0
     depends_on:
@@ -29,3 +29,5 @@ services:
 
 volumes:
   pgdata:
+
+

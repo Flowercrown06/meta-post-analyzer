@@ -5,8 +5,7 @@ import com.nracademy.metapostanalyzer.service.PostService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +26,7 @@ public class AnalysisController {
         List<Post> top3Posts = postService.getTop3EngagedPosts(allPosts);
         Map<String, Integer> likesByDay = postService.getLikesByDayOfWeek(allPosts);
 
-        Map<String, Object> report = new HashMap<>();
+        Map<String, Object> report = new LinkedHashMap<>();
         report.put("1. Top 3 Engaged Posts", top3Posts);
         report.put("2. Total Likes by Day of Week", likesByDay);
         report.put("3. Brief Conclusion", "Ən yüksək engagement alan postlar həftə sonuna yaxın paylaşılanlardır. " +

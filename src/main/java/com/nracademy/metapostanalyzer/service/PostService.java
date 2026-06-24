@@ -2,6 +2,7 @@ package com.nracademy.metapostanalyzer.service;
 
 import com.nracademy.metapostanalyzer.model.Post;
 import com.nracademy.metapostanalyzer.repository.PostRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
+    @Transactional
     public List<Post> getSavedOrMockPosts() {
         List<Post> dbPosts = postRepository.findAll();
 
@@ -30,11 +32,13 @@ public class PostService {
 
             for (int i = 1; i <= 20; i++) {
                 mockPosts.add(new Post(
-                        "id_" + i,
-                        "Bu bizim test məqsədli paylaşılan " + i + " nömrəli postumuzdur. #meta",
-                        today.minusDays(i % 7),
+                        null,
+                        "Bu bizim test məqsədli...",
                         15 + (i * 12) % 150,
-                        5 + (i * 4) % 40
+                        5 + (i * 4) % 40,
+                        null,
+                        null
+
                 ));
             }
 
